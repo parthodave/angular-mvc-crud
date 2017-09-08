@@ -1,0 +1,49 @@
+﻿
+
+<form ng-controller="UserController" method="post" >
+
+    <h2> Create User</h2>
+    @*<legend>Create User</legend>*@
+
+    <label>Name</label>
+    <input type="text" id="name" name="name" ng-model="user.name" placeholder="User Name">
+
+    <label>Email</label>
+    <input type="text" id="email" name="email" ng-model="user.email" placeholder="ur email here">
+
+    <label>Password</label>
+    <input type="text" id="pwd" name="pwd" ng-model="user.pwd" placeholder="ur own pwd here">
+
+    <button class="btn btn-primary" ng-click="AddEmp()" >Register</button>
+
+</form>
+
+@section scripts{
+    
+<script src="~/Scripts/angular.min.js"></script>
+    <script>
+        function UserController($scope, $http) {
+            $scope.user = {};
+            @*$scope.createUser = function () {
+                $http({
+                    method: 'POST',
+                    url: '@Url.Action("CreateUser","Home")',
+                    data: $scope.user
+                })
+            }*@
+
+            $scope.AddEmp = function (employee) {
+                var response = $http({
+                    method: "post",
+                    url:'@Url.Action("CreateUser", "Home")',
+                    data: JSON.stringify($scope.user),
+                    dataType: "json"
+                });
+                return response;
+            }
+        }
+
+
+    </script>
+    
+    }

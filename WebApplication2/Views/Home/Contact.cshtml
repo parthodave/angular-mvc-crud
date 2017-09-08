@@ -1,0 +1,78 @@
+﻿<div ng-app="myapp" ng-controller="mycntrl">
+
+    <input type="text" ng-model="id" />
+
+    <input type="text" ng-model="name" />
+    <input type="button" ng-click="AddName()"/>
+    <br />
+  
+    <div  >
+        <ul>
+            <li ng-repeat="nm in names">
+                {{ nm }}
+            </li>
+        </ul>
+   </div>
+
+    <h2>  Proper Data</h2>
+    <div>
+        <input type="text" ng-model="namesModel.id" style="margin:10px" readonly /> <br /> 
+        <input type="text" ng-model="namesModel.name" style="margin:10px" placeholder="Enter name"/>
+
+
+        <input type="button" ng-click="AddNametoList()" />
+
+        <ul>
+            <li ng-repeat="nma in namesList">
+                <h3>
+                    {{ nma.id }}   :  &nbsp;  {{ nma.name }}
+                </h3>
+            </li>
+        </ul>
+
+    </div>
+
+
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/angular.min.js"></script>
+    <script>
+
+        var myapp = angular.module("myapp", []);
+
+        myapp.controller("mycntrl", function ($scope) {
+            debugger;
+            $scope.id = "1";
+            $scope.name = "parth";
+
+            $scope.namesList =[]
+            $scope.namesModel = {
+                id: 0,
+                name:""
+            }
+            
+            $scope.names = ["parth", "jagdish", "Dave"];
+
+            $scope.AddName = function () {
+                $scope.names.push($scope.name);
+            }
+
+
+            $scope.AddNametoList = function () {
+                var emp = {
+                    id: $scope.namesList.length + 1,  
+                    name: $scope.namesModel.name
+                }
+
+                $scope.namesList.push(emp);
+            }
+        });
+
+
+
+
+    </script>
+
+}
